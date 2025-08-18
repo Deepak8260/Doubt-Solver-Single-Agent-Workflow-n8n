@@ -1,0 +1,350 @@
+{
+  "name": "Doubt-Solver-Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Doubt Form",
+        "formDescription": "💡 Welcome to the Doubt Forum!\nPlease use this form to share your doubts, questions, or queries.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "placeholder": "Enter Your Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "Entert Your Email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Ph no",
+              "fieldType": "number",
+              "placeholder": "Enter Your Mob Number"
+            },
+            {
+              "fieldLabel": "Doubt",
+              "placeholder": "Enter your doubt",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "customCss": ":root {\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(99, 77, 255, 0.06);\n\t--color-link: #7e8186;\n\t--color-header: #525356;\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: rgb(90, 76, 194);\n\t--color-submit-btn-bg: #ff6d5a;\n\t--color-submit-btn-text: #ffffff;\n\t--color-error: #ea1f30;\n\t--color-required: #ff6d5a;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-html-link: #ff6d5a;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -384,
+        -16
+      ],
+      "id": "f89421f0-16f2-4b7d-b622-b764c0349615",
+      "name": "On form submission",
+      "webhookId": "5cbdb4f8-2a90-40e0-aa88-6f3ce04fa346"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={\n  \"instructions\": \"You are a friendly assistant who explains doubts in a very simple way.  \n\nWhen you get form details:  \n1. Focus only on the 'Doubt' field.  \n2. Write the answer in **plain text only** (no HTML).  \n3. The reply must be:  \n   - Simple enough for a child to understand.  \n   - Short sentences and small paragraphs (no long blocks).  \n   - Polite, supportive, and encouraging.  \n   - Use real-life examples or analogies.  \n4. Always start with the learner’s Name (e.g., Hello Raju!).  \n5. In a final paragraph, introduce the formal definition smoothly by saying something like, \"For the more official way to say it:\" followed by the correct definition..  \n6. End with a kind, motivating note.  \n7. Do not include Email, Phone, or other fields in the output.  \n\n### Input (Form Data)\n{\n  \\\"Name\\\": \\\"{{ $('On form submission').item.json.Name }}\\\",\n  \\\"Email\\\": \\\"{{ $('On form submission').item.json.Email }}\\\",\n  \\\"Ph no\\\": \\\"{{ $('On form submission').item.json['Ph no'] }}\\\",\n  \\\"Doubt\\\": \\\"{{ $('On form submission').item.json.Doubt }}\\\"\n}\n\n### Output Format\n{\n  \\\"reply\\\": \\\"Hello {{ $('On form submission').item.json.Name }}!\\\\n\\\\n[Simple explanation of the doubt]\\\\n\\\\n[Relatable short example]\\\\n\\\\nProper Definition: [Correct definition here]\\\\n\\\\n[Encouraging closing note]\\\"\n}\"\n}\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        -16
+      ],
+      "id": "c3ef59f6-f953-4c1e-a7dd-c5121b519a8f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"reply\": \"<the clear and simple answer to the doubt>\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        496,
+        256
+      ],
+      "id": "8025b718-6859-4098-b23f-0ea634b0ccb5",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        240
+      ],
+      "id": "1b143066-0ec3-460c-8ea2-21e386f1ccd0",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "b2zHTx61spXYSepp",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "10kAtbF57dpDho2ojeEcRlC8PEm0_Mtdn5ZwMSv2c2jY",
+          "mode": "list",
+          "cachedResultName": "n8n_sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10kAtbF57dpDho2ojeEcRlC8PEm0_Mtdn5ZwMSv2c2jY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 317428404,
+          "mode": "list",
+          "cachedResultName": "Doubts-1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10kAtbF57dpDho2ojeEcRlC8PEm0_Mtdn5ZwMSv2c2jY/edit#gid=317428404"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Doubt answered": "={{ $json.output.reply }}",
+            "Name": "={{ $('On form submission').item.json.Name }}",
+            "EMail": "={{ $('On form submission').item.json.Email }}",
+            "Phone Number": "={{ $('On form submission').item.json['Ph no'] }}",
+            "Doubt Asked": "={{ $('On form submission').item.json.Doubt }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "EMail",
+              "displayName": "EMail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Doubt Asked",
+              "displayName": "Doubt Asked",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Doubt answered",
+              "displayName": "Doubt answered",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        -16
+      ],
+      "id": "0b18c0ee-4ad5-48fd-a6e1-056d7c9814ce",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "sibc7QjpBOKEuC5E",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Doubt Solver Workflow  \n\n**Purpose:**  \nTake a user’s doubt from a form, generate an answer using AI Agent, save it in google sheet, and send it back by email.  \n\n**Steps:**  \n1. **Start:** Trigger when a user submits the form with Name, Email, and Doubt.  \n2. **Send Confirmation:** An email is sent to confirm the doubt was received.  \n3. **AI Agent:** The doubt is passed to AI, which creates a clear reply.  \n4. **Save Record:** Both the doubt and the AI’s answer are stored in Google Sheets.  \n5. **Send Answer:** The AI’s reply is emailed back to the user.  \n\n**Flow:**  \nForm → Confirmation Email → AI Answer → Save in Google Sheets → Final Answer Email  \n",
+        "height": 368,
+        "width": 608
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        48,
+        -448
+      ],
+      "typeVersion": 1,
+      "id": "b15de02c-eb58-439f-b393-f8b473d67c7c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "sendTo": "deepakkmohanty.ds@gmail.com",
+        "subject": "New Doubt Submission",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <title>New Doubt Notification</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      color: #333;\n      line-height: 1.5;\n      padding: 20px;\n    }\n    .container {\n      border: 1px solid #ddd;\n      border-radius: 8px;\n      background-color: #f9f9f9;\n      padding: 20px;\n      max-width: 600px;\n    }\n    h2 {\n      color: #d9534f;\n      margin-bottom: 10px;\n    }\n    .details {\n      margin-top: 15px;\n    }\n    .details p {\n      margin: 6px 0;\n    }\n    .label {\n      font-weight: bold;\n      display: inline-block;\n      width: 130px;\n    }\n    .highlight-doubt {\n      text-align: center;\n      font-size: 18px;\n      font-weight: bold;\n      color: #222;\n      margin: 25px 0;\n      padding: 15px;\n      background-color: #fff3cd; /* light yellow background */\n      border: 1px solid #ffeeba;\n      border-radius: 6px;\n    }\n    .footer {\n      font-size: 12px;\n      color: #777;\n      margin-top: 20px;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <h2>🚨 New Doubt Received</h2>\n    <p>Hello,</p>\n    <p>A new doubt has just been submitted. Here are the details:</p>\n\n    <div class=\"details\">\n      <p><span class=\"label\">Name:</span> {{ $('On form submission').item.json.Name }}</p>\n      <p><span class=\"label\">Email:</span> {{ $('On form submission').item.json.Email }}</p>\n      <p><span class=\"label\">Phone No:</span> {{ $('On form submission').item.json['Ph no'] }}</p>\n    </div>\n\n    <!-- Highlighted Doubt Section -->\n    <div class=\"highlight-doubt\">\n      {{ $('On form submission').item.json.Doubt }}\n    </div>\n\n    <p>Regards,<br>The n8n Automation Bot 🤖</p>\n\n    <div class=\"footer\">\n      <p>This is an automated notification from your Doubt Forum.</p>\n    </div>\n  </div>\n</body>\n</html>\n",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "Owner Deepak"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -48,
+        -16
+      ],
+      "id": "3bb849fc-c1f0-47b3-a66a-7a4f99bad29d",
+      "name": "Confirmation Email",
+      "webhookId": "6fae544a-0669-49c6-a365-792c04165c63",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Bo9W9fBlnrR4garG",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json.Email }}",
+        "subject": "Answer To Your Raised Doubt",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Response to Your Query</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      margin: 0;\n      padding: 0;\n      text-align: left; /* enforce left alignment */\n      background: linear-gradient(135deg, #e0f7fa, #fce4ec);\n      background-attachment: fixed;\n      position: relative;\n      overflow-x: hidden;\n    }\n\n    /* Decorative background pattern */\n    body::before {\n      content: \"\";\n      position: absolute;\n      top: 0;\n      left: 0;\n      width: 200%;\n      height: 200%;\n      background-image: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);\n      background-size: 40px 40px;\n      animation: moveBackground 15s linear infinite;\n      z-index: 0;\n    }\n\n    @keyframes moveBackground {\n      from { transform: translate(0, 0); }\n      to { transform: translate(-40px, -40px); }\n    }\n\n    .container {\n      max-width: 600px;\n      margin: 50px auto; \n      background: #ffffff;\n      padding: 25px;\n      border-radius: 12px;\n      box-shadow: 0px 6px 18px rgba(0,0,0,0.15);\n      text-align: left;\n      position: relative;\n      z-index: 1;\n    }\n\n    h2 {\n      color: #2a4365;\n      font-size: 22px;\n      margin-bottom: 15px;\n      text-align: left;\n    }\n\n    p {\n      color: #333333;\n      line-height: 1.6;\n      font-size: 15px;\n      text-align: left;\n    }\n\n    .question {\n      background: #edf2f7;\n      padding: 12px 15px;\n      border-radius: 6px;\n      margin-bottom: 20px;\n      font-style: italic;\n      text-align: left;\n    }\n\n    .response {\n      background: #e6fffa;\n      padding: 15px;\n      border-left: 4px solid #38b2ac;\n      border-radius: 6px;\n      margin-bottom: 20px;\n      text-align: left;\n    }\n\n    .footer {\n      font-size: 13px;\n      color: #666666;\n      margin-top: 20px;\n      text-align: left;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <h2>Response to Your Query</h2>\n    <p>Dear <strong>{{ $('On form submission').item.json.Name }}</strong>,</p>\n    <p>Thank you for reaching out. Below is the response to your query:</p>\n    \n    <div class=\"question\">\n      <strong>Your Question:</strong> <br>\n      {{ $('On form submission').item.json.Doubt }}\n    </div>\n\n    <div class=\"response\">\n      <strong>Our Response:</strong> <br>\n      {{ $('AI Agent').item.json.output.reply.replace(/\\n/g, '<br>') }}\n\n    </div>\n    \n    <p>If you need further clarification, feel free to reply to this email.</p>\n    <div class=\"footer\">\n      Best Regards,<br>\n      <strong>KumarAi Support Team</strong>\n    </div>\n  </div>\n</body>\n</html>\n",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "Deepak Kumar Mohanty"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        944,
+        -16
+      ],
+      "id": "93ac9e2c-42dd-4245-9539-7d999617db67",
+      "name": "Email sent Back To User",
+      "webhookId": "1ebba0d0-a816-4f74-9333-c9ae11f8ccf1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Bo9W9fBlnrR4garG",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Confirmation Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Email sent Back To User",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirmation Email": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5b2b04ed-ad8a-43a1-ba14-dc0be2a5a3ee",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "cd1532e66736ba1101584ca5e5daabe7c26b56f3d6c88398ed652d60aa39541f"
+  },
+  "id": "Pysndf5MKSeaIPYb",
+  "tags": [
+    {
+      "name": "agent1",
+      "id": "Jhoc5nMtk4cuR4Y8",
+      "createdAt": "2025-08-18T23:48:11.544Z",
+      "updatedAt": "2025-08-18T23:48:11.544Z"
+    }
+  ]
+}
