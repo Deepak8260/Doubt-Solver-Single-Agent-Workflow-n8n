@@ -13,7 +13,7 @@ The workflow acts as a **Doubt Solver Bot**:
 
 It’s like having an **AI teaching assistant** available 24/7.
 
-![Ouput](../Automation-2_Doubt_Solver_Using_Single_Ai_Agent/assets/complete-workflow.png)
+![Ouput](assets/complete-workflow.png)
 
 ---
 
