@@ -163,6 +163,6 @@ It’s like having an **AI teaching assistant** available 24/7.
 
 ## 📜 License
 
-This project is open-source and available under the [MIT License](LICENSE).
+This project is open-source and available under the [MIT License](../Automation-2_Doubt_Solver_Using_Single_Ai_Agent/LICENSE).
 
 ---
