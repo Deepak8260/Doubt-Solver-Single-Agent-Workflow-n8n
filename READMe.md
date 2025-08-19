@@ -152,7 +152,7 @@ It’s like having an **AI teaching assistant** available 24/7.
    * ✅ User inbox → Answer email with details.
    * ✅ Google Sheets → Row with submission + AI answer.
 
-📸 *Workflow Screenshot:* ![Full Workflow](../Automation-2_Doubt_Solver_Using_Single_Ai_Agent/assets/complete-workflow.png)
+📸 *Workflow Screenshot:* ![Full Workflow](assets/complete-workflow.png)
 
 ---
 
