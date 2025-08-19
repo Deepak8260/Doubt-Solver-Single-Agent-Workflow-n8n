@@ -35,7 +35,9 @@ It’s like having an **AI teaching assistant** available 24/7.
 * Fields: Name, Email, Phone, Doubt, Submitted Time.
 * Triggered when a user clicks **Submit**.
 
-📸 *Screenshot:* ![Form Trigger](assets/step1-form-trigger.png)
+📸 *Screenshot:* 
+
+![Form Trigger](assets/step1-form-trigger.png)
 
 ---
 
@@ -44,7 +46,9 @@ It’s like having an **AI teaching assistant** available 24/7.
 * Sends a notification email to the workflow owner.
 * HTML email layout shows: Name, Email, Phone, Doubt.
 
-📸 *Screenshot:* ![Owner Email Node](assets/step2-owner-email.png)
+📸 *Screenshot:* 
+
+![Owner Email Node](assets/step2-owner-email.png)
 
 ---
 
@@ -54,7 +58,9 @@ It’s like having an **AI teaching assistant** available 24/7.
 * Uses a **Structured Output Parser** to ensure clean, clear responses.
 * Prompt is designed to give simple, easy-to-understand answers.
 
-📸 *Screenshot:* ![AI Agent](assets/step3-ai-agent.png)
+📸 *Screenshot:* 
+
+![AI Agent](assets/step3-ai-agent.png)
 
 ---
 
@@ -63,7 +69,9 @@ It’s like having an **AI teaching assistant** available 24/7.
 * Stores: Name, Email, Phone, Doubt, Answer.
 * Creates a permanent record of all submissions.
 
-📸 *Screenshot:* ![Google Sheets Node](assets/step4-sheets.png)
+📸 *Screenshot:* 
+
+![Google Sheets Node](assets/step4-sheets.png)
 
 ---
 
@@ -72,7 +80,9 @@ It’s like having an **AI teaching assistant** available 24/7.
 * Sends a confirmation + AI-generated answer to the user.
 * Styled HTML email for readability.
 
-📸 *Screenshot:* ![User Email Node](assets/step5-user-email.png)
+📸 *Screenshot:* 
+
+![User Email Node](assets/step5-user-email.png)
 
 ---
 
